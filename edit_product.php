@@ -390,18 +390,14 @@ if (isset($_GET['id']))
                               <div class="form-group mb-3">
                                 <label for="category">Catégorie: </label>
                                 <?php
-                                if ($product_category == 0) {
+                                if ($category == 0) {
                                   echo "Une Boisson";
-                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
-                                } else if ($product_category == 1) {
+                                } else if ($category == 1) {
                                   echo "Une Boisson Chaude";
-                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
-                                } else if ($product_category == 2) {
+                                } else if ($category == 2) {
                                   echo "Un Biscuit";
-                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
-                                } else if ($product_category == 3) {
+                                } else if ($category == 3) {
                                   echo "Un Snacks";
-                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
                                 }
                                   echo '<select id="category" name="category" type="text"
                       class="form-control validate">
