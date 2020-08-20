@@ -402,7 +402,7 @@ if (isset($_GET['id']))
                                 } else if ($product_category == 3) {
                                   echo "Un Snacks";
                                   echo '<input type="hidden" name="category" value=' . $product_category . ' />';
-                                } else
+                                }
                                   echo '<select id="category" name="category" type="text"
                       class="form-control validate">
                       <option value="0">Boissons</option>
