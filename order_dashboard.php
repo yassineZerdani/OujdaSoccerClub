@@ -317,9 +317,22 @@ else
 
 while(list($product_id,$image,$stock,$product_name,$price,$product_cat)=mysqli_fetch_array($result))
 {
+  if($stock>50){
 echo "
 <div class='col-lg-6 col-xl-3' >
-<span class='badge badge-info'>$stock</span>
+<span class='badge badge-success'>$stock</span>
+";}
+if($stock<=50 && $stock>10){
+  echo "
+  <div class='col-lg-6 col-xl-3' >
+  <span class='badge badge-warning'>$stock</span>
+  ";}
+  if($stock<=10){
+    echo "
+    <div class='col-lg-6 col-xl-3' >
+    <span class='badge badge-danger'>$stock</span>
+    ";}
+echo "
     <div class='card text-white bg-primary mb-3'>
     
         <div class='hovereffect'  >
