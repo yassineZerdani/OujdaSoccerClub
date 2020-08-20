@@ -1,14 +1,17 @@
-<?php session_start(); if(!isset($_SESSION['admin'])){header("Location:login.php");die();} ?>
+<?php session_start();
+if (!isset($_SESSION['admin'])) {
+  header("Location:login.php");
+  die();
+} ?>
 <?php
 
 include("db.php");
-require_once __DIR__.'/Cloudinary/autoload.php';
+require_once __DIR__ . '/Cloudinary/autoload.php';
 //session_start();
 
 
-if(isset($_POST['submit']))
-{
-/*
+if (isset($_POST['submit'])) {
+  /*
 $product_name=$_POST['product_name'];
 $details=$_POST['details'];
 $price=$_POST['price'];
@@ -35,58 +38,59 @@ mysqli_query($con,"insert into products (product_cat,product_title,product_price
 
  header("location: sumit_form.php?success=1");
 }*/
-if(isset($_POST['id']) && $_POST['id']!=""){
-$product_id=$_POST['id'];
-if(isset($_POST['product_name']) && $_POST['product_name'] != "")
-  $product_name=$_POST['product_name'];
-else
-  $product_name = "";
-if(isset($_POST['category']) && $_POST['category'] != "")
-  $category=$_POST['category'];
-else
-  $category = "";
-if(isset($_POST['price']) && $_POST['price'] != "")
-  $price=$_POST['price'];
-else
-  $price = "";
-if(isset($_POST['description']) && $_POST['description'] != "")
-  $description=$_POST['description'];
-else
-  $description = "";
-if(isset($_POST['stock']) && $_POST['stock'] != "")
-  $stock=$_POST['stock'];
-else
-  $stock = 0;
-$pic_name = "";
-$tags = "";
-$picture_name=$_FILES['picture']['name'];
-$picture_type=$_FILES['picture']['type'];
-$picture_tmp_name=$_FILES['picture']['tmp_name'];
-$picture_size=$_FILES['picture']['size'];
-$response = "";
-if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="image/png" || $picture_type=="image/gif")
-{
-  if($picture_size<=50000000){
-    //$pic_name=time()."_".$picture_name;
-    //move_uploaded_file($picture_tmp_name,"uploads/products/".$pic_name);
-    $response = \Cloudinary\Uploader::upload($picture_tmp_name,array(
-    "folder" => "products/"))['public_id'];
+  if (isset($_POST['id']) && $_POST['id'] != "") {
+    $product_id = $_POST['id'];
+    if (isset($_POST['product_name']) && $_POST['product_name'] != "")
+      $product_name = $_POST['product_name'];
+    else
+      $product_name = "";
+    if (isset($_POST['category']) && $_POST['category'] != "")
+      $category = $_POST['category'];
+    else
+      $category = "";
+    if (isset($_POST['price']) && $_POST['price'] != "")
+      $price = $_POST['price'];
+    else
+      $price = "";
+    if (isset($_POST['description']) && $_POST['description'] != "")
+      $description = $_POST['description'];
+    else
+      $description = "";
+    if (isset($_POST['stock']) && $_POST['stock'] != "")
+      $stock = $_POST['stock'];
+    else
+      $stock = 0;
+    $pic_name = "";
+    $tags = "";
+    $picture_name = $_FILES['picture']['name'];
+    $picture_type = $_FILES['picture']['type'];
+    $picture_tmp_name = $_FILES['picture']['tmp_name'];
+    $picture_size = $_FILES['picture']['size'];
+    $response = "";
+    if ($picture_type == "image/jpeg" || $picture_type == "image/jpg" || $picture_type == "image/png" || $picture_type == "image/gif") {
+      if ($picture_size <= 50000000) {
+        //$pic_name=time()."_".$picture_name;
+        //move_uploaded_file($picture_tmp_name,"uploads/products/".$pic_name);
+        $response = \Cloudinary\Uploader::upload($picture_tmp_name, array(
+          "folder" => "products/"
+        ))['public_id'];
+      }
+    }
+    if ($response != "")
+      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',product_image='$response' WHERE product_id='$product_id'") or die("query incorrect");
+    else
+      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock' WHERE product_id='$product_id'") or die("query incorrect");
+
+    //header("location: sumit_form.php?success=1");
   }
 }
-if($response!="")
-    mysqli_query($con,"UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',product_image='$response' WHERE product_id='$product_id'") or die ("query incorrect");
-else
-      mysqli_query($con,"UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock' WHERE product_id='$product_id'") or die ("query incorrect");
-
-//header("location: sumit_form.php?success=1");
-}
-}
-if(isset($_GET['id']))
-  $product_id=$_GET['id'];
+if (isset($_GET['id']))
+  $product_id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -94,13 +98,13 @@ if(isset($_GET['id']))
   <title>Admin Dashboard</title>
 
   <!-- GOOGLE FONTS -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
   <link href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css" rel="stylesheet" />
 
   <!-- PLUGINS CSS STYLE -->
   <link href="assets/plugins/toaster/toastr.min.css" rel="stylesheet" />
   <link href="assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
-  <link href="assets/plugins/flag-icons/css/flag-icon.min.css" rel="stylesheet"/>
+  <link href="assets/plugins/flag-icons/css/flag-icon.min.css" rel="stylesheet" />
   <link href="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
   <link href="assets/plugins/ladda/ladda.min.css" rel="stylesheet" />
   <link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
@@ -110,7 +114,7 @@ if(isset($_GET['id']))
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="assets/css/sleek.css" />
 
-  
+
 
   <!-- FAVICON -->
   <link href="wah.png" rel="shortcut icon" />
@@ -129,7 +133,9 @@ if(isset($_GET['id']))
 
 <body class="sidebar-fixed sidebar-dark header-light header-fixed" id="body">
   <script>
-    NProgress.configure({ showSpinner: false });
+    NProgress.configure({
+      showSpinner: false
+    });
     NProgress.start();
   </script>
 
@@ -315,10 +321,10 @@ if(isset($_GET['id']))
           </div>
         </nav>
       </header>
-    <?php
-    $result=mysqli_query($con,"select product_image, product_title,product_price,product_desc,stock from products where product_id='$product_id'")or die ("query 1 incorrect.....");
-    $product = mysqli_fetch_array($result);
-    ?>
+      <?php
+      $result = mysqli_query($con, "select product_image, product_title,product_price,product_desc,stock from products where product_id='$product_id'") or die("query 1 incorrect.....");
+      $product = mysqli_fetch_array($result);
+      ?>
       <div class="content-wrapper">
         <div class="content">
           <div class="breadcrumb-wrapper">
@@ -341,115 +347,137 @@ if(isset($_GET['id']))
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12">
                           <form action="edit_product.php" method="post" name="form" enctype="multipart/form-data" class="tm-edit-product-form">
-              <input name="id" type="hidden" value="<?php echo $product_id ?>"/>
+                            <input name="id" type="hidden" value="<?php echo $product_id ?>" />
                             <div class="form-group mb-3">
                               <label for="name">Nom
                               </label>
-                              <input name="product_name" id="product_name" type="text" value=<?php echo $product[1];?>
-                                class="form-control validate" />
+                              <input name="product_name" id="product_name" type="text" value=<?php echo $product[1]; ?> class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Prix</label>
-                              <input name="price" id="price" type="text" value=<?php echo $product[2];?> class="form-control validate" />
+                              <input name="price" id="price" type="text" value=<?php echo $product[2]; ?> class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Prix d'achat</label>
-                              <input  type="text" class="form-control validate" />
+                              <input type="text" class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Prix unitaire</label>
-                              <input  type="text" class="form-control validate" />
+                              <input type="text" class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Nouvellle Entrer</label>
-                              <input  type="text" class="form-control validate" />
+                              <input type="text" class="form-control validate" />
                             </div>
 
                             <div class="row">
                               <div class="form-group mb-3 col-xs-12 col-sm-6">
                                 <label for="stock">Stock
                                 </label>
-                                <input id="stock" name="stock" type="number"
-                                  class="form-control validate" value="<?php echo $product[4]; ?>" />
+                                <input id="stock" name="stock" type="number" class="form-control validate" value="<?php echo $product[4]; ?>" />
                               </div>
                             </div>
-              
-              <div>
+
+                            <div>
                               <div class="form-group mb-3">
                                 <label for="description">Description
                                 </label>
-                                <textarea id="description" name="description" value=<?php echo $product[3];?> type="text"
-                                  class="form-control validate" ></textarea>
+                                <textarea id="description" name="description" value=<?php echo $product[3]; ?> type="text" class="form-control validate"></textarea>
                               </div>
                             </div>
-              
-              <div>
 
+                            <div>
+                              <div class="form-group mb-3">
+                                <label for="category">Catégorie: </label>
+                                <?php
+                                if ($product_category == 0) {
+                                  echo "Une Boisson";
+                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
+                                } else if ($product_category == 1) {
+                                  echo "Une Boisson Chaude";
+                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
+                                } else if ($product_category == 2) {
+                                  echo "Un Biscuit";
+                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
+                                } else if ($product_category == 3) {
+                                  echo "Un Snacks";
+                                  echo '<input type="hidden" name="category" value=' . $product_category . ' />';
+                                } else
+                                  echo '<select id="category" name="category" type="text"
+                      class="form-control validate">
+                      <option value="0">Boissons</option>
+                      <option value="1">Boissons Chaudes</option>
+                      <option value="2">Biscuits</option>
+                      <option value="3">Snacks</option>
+                      </select>';
+                                ?>
+                              </div>
+                            </div>
+
+                            <div>
+
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                              <div class="tm-product-img-edit mx-auto">
+                                <img id="productImage" src="https://res.cloudinary.com/dnhuupkqa/image/upload/<?php echo $product[0]; ?>" alt="Product image" class="img-fluid d-block mx-auto">
+                                <i class="fas fa-cloud-upload-alt tm-upload-icon" onclick="document.getElementById('fileInput').click();"></i>
+                              </div>
+                              <div class="custom-file mt-3 mb-3">
+                                <input id="fileInput" name="picture" type="file" style="display:none;" accept="image/*" onchange="displayImage(event)" />
+                                <input type="button" class="btn btn-primary btn-block mx-auto" value="CHANGER L'IMAGE" onclick="document.getElementById('fileInput').click();" />
+                              </div>
+
+                            </div>
+                            <div class="col-12">
+                              <button type="submit" name="submit" id="submit" class="btn btn-primary btn-block text-uppercase">Modifier</button>
+                            </div>
+                          </form>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                          <div class="tm-product-img-edit mx-auto">
-                            <img id="productImage" src="https://res.cloudinary.com/dnhuupkqa/image/upload/<?php echo $product[0];?>" alt="Product image" class="img-fluid d-block mx-auto">
-                            <i class="fas fa-cloud-upload-alt tm-upload-icon"
-                              onclick="document.getElementById('fileInput').click();"></i>
-                          </div>
-                          <div class="custom-file mt-3 mb-3">
-                            <input id="fileInput" name="picture" type="file" style="display:none;" accept="image/*" onchange="displayImage(event)" />
-                            <input type="button" class="btn btn-primary btn-block mx-auto" value="CHANGER L'IMAGE"
-                              onclick="document.getElementById('fileInput').click();" />
-                          </div>
-                          
-                        </div>
-                        <div class="col-12">
-                          <button type="submit" name="submit" id="submit" class="btn btn-primary btn-block text-uppercase">Modifier</button>
-                        </div>
-                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-        <script>
-        var displayImage = function(event) {
-          var image = document.getElementById('productImage');
-          image.src = URL.createObjectURL(event.target.files[0]);
-        };
-        </script>
+                <script>
+                  var displayImage = function(event) {
+                    var image = document.getElementById('productImage');
+                    image.src = URL.createObjectURL(event.target.files[0]);
+                  };
+                </script>
 
-              <script src="js/jquery-3.3.1.min.js"></script>
-              <!-- https://jquery.com/download/ -->
-              <script src="jquery-ui-datepicker/jquery-ui.min.js"></script>
-              <!-- https://jqueryui.com/download/ -->
-              <script src="js/bootstrap.min.js"></script>
-              <!-- https://getbootstrap.com/ -->
-              <script>
-                $(function () {
-                  $("#expire_date").datepicker({
-                    defaultDate: "10/22/2020"
+                <script src="js/jquery-3.3.1.min.js"></script>
+                <!-- https://jquery.com/download/ -->
+                <script src="jquery-ui-datepicker/jquery-ui.min.js"></script>
+                <!-- https://jqueryui.com/download/ -->
+                <script src="js/bootstrap.min.js"></script>
+                <!-- https://getbootstrap.com/ -->
+                <script>
+                  $(function() {
+                    $("#expire_date").datepicker({
+                      defaultDate: "10/22/2020"
+                    });
                   });
-                });
-              </script>
-              <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM"
-                defer></script>
-              <script src="assets/plugins/jquery/jquery.min.js"></script>
-              <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-              <script src="assets/plugins/toaster/toastr.min.js"></script>
-              <script src="assets/plugins/slimscrollbar/jquery.slimscroll.min.js"></script>
-              <script src="assets/plugins/charts/Chart.min.js"></script>
-              <script src="assets/plugins/ladda/spin.min.js"></script>
-              <script src="assets/plugins/ladda/ladda.min.js"></script>
-              <script src="assets/plugins/jquery-mask-input/jquery.mask.min.js"></script>
-              <script src="assets/plugins/select2/js/select2.min.js"></script>
-              <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
-              <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
-              <script src="assets/plugins/daterangepicker/moment.min.js"></script>
-              <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-              <script src="assets/plugins/jekyll-search.min.js"></script>
-              <script src="assets/js/sleek.js"></script>
-              <script src="assets/js/chart.js"></script>
-              <script src="assets/js/date-range.js"></script>
-              <script src="assets/js/map.js"></script>
-              <script src="assets/js/custom.js"></script>
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM" defer></script>
+                <script src="assets/plugins/jquery/jquery.min.js"></script>
+                <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="assets/plugins/toaster/toastr.min.js"></script>
+                <script src="assets/plugins/slimscrollbar/jquery.slimscroll.min.js"></script>
+                <script src="assets/plugins/charts/Chart.min.js"></script>
+                <script src="assets/plugins/ladda/spin.min.js"></script>
+                <script src="assets/plugins/ladda/ladda.min.js"></script>
+                <script src="assets/plugins/jquery-mask-input/jquery.mask.min.js"></script>
+                <script src="assets/plugins/select2/js/select2.min.js"></script>
+                <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+                <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
+                <script src="assets/plugins/daterangepicker/moment.min.js"></script>
+                <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+                <script src="assets/plugins/jekyll-search.min.js"></script>
+                <script src="assets/js/sleek.js"></script>
+                <script src="assets/js/chart.js"></script>
+                <script src="assets/js/date-range.js"></script>
+                <script src="assets/js/map.js"></script>
+                <script src="assets/js/custom.js"></script>
 </body>
 
 </html>
