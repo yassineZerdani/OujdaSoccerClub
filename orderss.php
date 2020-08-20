@@ -368,9 +368,7 @@ echo "<td>                                	$date
                                     <button>
                                         <a href='orderss.php?order_id=$order_id&action=delete' class='badge badge-danger'>Supprimer</a>
                                     </button>
-                                    <button data-toggle='modal' data-target='#exampleModal'>
-                                        <a href='#'  class='badge badge-warning'>Modifier</a>
-                                    </button>
+                                    
                                     <!-- Modal -->
 <div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
   <div class='modal-dialog' role='document'>
