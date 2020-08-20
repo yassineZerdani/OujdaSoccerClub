@@ -1,0 +1,136 @@
+<html>
+    
+    <!--
+          ====================================
+          ——— LEFT SIDEBAR WITH FOOTER
+          =====================================
+    -->
+        <aside class="left-sidebar bg-sidebar">
+            <div id="sidebar" class="sidebar sidebar-with-footer">
+              <!-- Aplication Brand -->
+              <div class="app-brand">
+                <a href="index.php">
+                  <img src="wah.png" style="position:relative; right: 20px;">
+                  <g fill="none" fill-rule="evenodd">
+                    <path class="logo-fill-blue" fill="#7DBCFF" d="M0 4v25l8 4V0zM22 4v25l8 4V0z" />
+                    <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
+                  </g>
+                  </svg>
+                  <span class="brand-name" style="position:relative; right: 30px;">Dashboard</span>
+                </a>
+              </div>
+              <!-- begin sidebar scrollbar -->
+              <div class="sidebar-scrollbar">
+      
+                <!-- sidebar menu -->
+                <ul class="nav sidebar-inner" id="sidebar-menu">
+                  <li class="has-sub active expand">
+                    <a class="sidenav-item-link" href="index.php">
+                      <i class="mdi mdi-view-dashboard-outline"></i>
+                      <span class="nav-text">Dashboard</span>
+                    </a>
+                  </li>
+                  <li class="has-sub">
+                    <a class="sidenav-item-link" href="stadium_reservation.php">
+                      <i class="mdi mdi-soccer-field"></i>
+                      <span class="nav-text">Reserver Terrain</span>
+                    </a>
+                  </li>
+                  <li class="has-sub">
+                    <a class="sidenav-item-link" href="reservations.php">
+                      <i class="mdi mdi-clock"></i>
+                      <span class="nav-text">Les Reservations</span>
+                    </a>
+                  </li>
+                  <li class="has-sub">
+                    <a class="sidenav-item-link" href="order_dashboard.php">
+                      <i class="mdi mdi-food"></i>
+                      <span class="nav-text">Commander</span>
+                    </a>
+                  </li>
+                  <li class="has-sub">
+                    <a class="sidenav-item-link" href="ordersFinal.php">
+                      <i class="mdi mdi-note-multiple"></i>
+                      <span class="nav-text">Ordres</span>
+                    </a>
+                  </li>
+                  <li class="has-sub">
+                    <a class="sidenav-item-link" href="analytics.php">
+                      <i class="mdi mdi-chart-line"></i>
+                      <span class="nav-text">Analytique</span>
+                    </a>
+                  </li>
+                  <li class="has-sub">
+                    <a class="sidenav-item-link" href="users.php">
+                      <i class="mdi mdi-account"></i>
+                      <span class="nav-text">les abonnés</span>
+                    </a>
+                  </li>
+      
+                  <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#charts" aria-expanded="false" aria-controls="charts">
+                      <i class="mdi mdi-coffee-outline"></i>
+                      <span class="nav-text">La Cafétéria</span> <b class="caret"></b>
+                    </a>
+                    <ul class="collapse" id="charts" data-parent="#sidebar-menu">
+                      <div class="sub-menu">
+                        <li>
+                          <a class="sidenav-item-link" href="products.php?category=0">
+                            <span class="nav-text">Boissons</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a class="sidenav-item-link" href="products.php?category=1">
+                            <span class="nav-text">Boissons Chaudes</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a class="sidenav-item-link" href="products.php?category=2">
+                            <span class="nav-text">Biscuits</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a class="sidenav-item-link" href="products.php?category=3">
+                            <span class="nav-text">Snacks</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a class="sidenav-item-link" href="products.php">
+                            <span class="nav-text">Tous Les Produits</span>
+                          </a>
+                        </li>
+                      </div>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+          <div class="page-wrapper">
+            <!-- Header -->
+            <header class="main-header " id="header">
+              <nav class="navbar navbar-static-top navbar-expand-lg">
+      
+                <!-- Sidebar toggle button -->
+                <button id="sidebar-toggler" class="sidebar-toggle">
+                  <span class="sr-only">Toggle navigation</span>
+                </button>
+                <!-- search form -->
+                <div class="search-form d-none d-lg-inline-block">
+                  <div class="input-group">
+                  </div>
+                  <div id="search-results-container">
+                    <ul id="search-results"></ul>
+                  </div>
+                </div>
+      
+                <div class="navbar-right ">
+                  <ul class="nav navbar-nav">
+                    
+                    <li><a href="logout.php" type="button" class="btn btn-outline-secondary" id="deconn">Deconnexion</a></li>
+                  </ul>
+                </div>
+              </nav>
+            </header>
+
+            </html>
