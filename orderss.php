@@ -15,6 +15,8 @@ while($row1 = mysqli_fetch_array($run1)){
    $query2 = "SELECT * FROM products where product_id = $product_id";
    $run2 = mysqli_query($con,$query2);
    mysqli_query($con,"UPDATE products SET stock=stock-'$quantity' WHERE product_id=$product_id") or die ("query incorrect");
+   if($product_id == 1031){
+   mysqli_query($con,"UPDATE products SET stock=stock-'$quantity' WHERE product_id=371") or die ("query incorrect");}
    }
 }
 
