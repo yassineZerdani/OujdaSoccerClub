@@ -15,7 +15,7 @@ USE `heroku_85f8cfc15f34318`;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-SET TIME_ZONE='+01:00'
+SET TIME_ZONE='+01:00';
 
 --
 -- Table structure for table `admin_info`
