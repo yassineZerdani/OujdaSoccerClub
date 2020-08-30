@@ -12,9 +12,9 @@ include("Cloudinary/Cloudinary.php");
 
 
 $servername = "us-cdbr-east-02.cleardb.com";
-$username = "b7d774973c8abc";
-$password = "8c8b3f7a";
-$db = "heroku_c4f1eaaf2d60e8f";
+$username = "b757ff0df897f7";
+$password = "77b62a27";
+$db = "heroku_85f8cfc15f34318";
 /*
 $servername = "localhost";
 $username = "hmida";
