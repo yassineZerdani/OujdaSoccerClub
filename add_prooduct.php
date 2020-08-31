@@ -54,7 +54,7 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
     //move_uploaded_file($picture_tmp_name,"uploads/products/".$pic_name);
     $response = \Cloudinary\Uploader::upload($picture_tmp_name,array(
     "folder" => "products/"))['public_id'];
-    mysqli_query($con,"insert into products (product_cat,product_title,product_price, product_desc, product_image,product_keywords,stock) values ('$category','$product_name','$price','$description','$response','$tags','$stock')") or die ("query incorrect");
+    mysqli_query($con,"insert into products (product_cat,product_title,product_price, product_desc, product_image,product_keywords,stock,stock_init) values ('$category','$product_name','$price','$description','$response','$tags','$stock','$stock')") or die ("query incorrect");
   }
 }
 //header("location: sumit_form.php?success=1");

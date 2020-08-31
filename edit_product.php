@@ -77,9 +77,9 @@ mysqli_query($con,"insert into products (product_cat,product_title,product_price
       }
     }
     if ($response != "")
-      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',product_image='$response' WHERE product_id='$product_id'") or die("query incorrect");
+      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',stock_init='$stock',product_image='$response' WHERE product_id='$product_id'") or die("query incorrect");
     else
-      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock' WHERE product_id='$product_id'") or die("query incorrect");
+      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',stock_init='$stock' WHERE product_id='$product_id'") or die("query incorrect");
 
     //header("location: sumit_form.php?success=1");
   }

@@ -311,23 +311,23 @@ if(isset($_GET['category']))
               <div class="row">
 <?php 
 if($product_category==-1)
-  $result=mysqli_query($con,"select product_id,product_image, stock,product_title,product_price,product_cat from products")or die ("query 1 incorrect.....");
+  $result=mysqli_query($con,"select product_id,product_image, stock, stock_init, product_title,product_price,product_cat from products")or die ("query 1 incorrect.....");
 else
-  $result=mysqli_query($con,"select product_id,product_image,stock, product_title,product_price,product_cat from products where product_cat=$product_category")or die ("query 1 incorrect.....");
+  $result=mysqli_query($con,"select product_id,product_image,stock, stock_init, product_title,product_price,product_cat from products where product_cat=$product_category")or die ("query 1 incorrect.....");
 
-while(list($product_id,$image,$stock,$product_name,$price,$product_cat)=mysqli_fetch_array($result))
+while(list($product_id,$image,$stock,$stock_init,$product_name,$price,$product_cat)=mysqli_fetch_array($result))
 {
-  if($stock>50){
+  if($stock>0.75*$stock_init){
 echo "
 <div class='col-lg-6 col-xl-3' >
 <span class='badge badge-success'>$stock</span>
 ";}
-if($stock<=50 && $stock>10){
+if($stock<=0.75*$stock_init && $stock>0.25*$stock_init){
   echo "
   <div class='col-lg-6 col-xl-3' >
   <span class='badge badge-warning'>$stock</span>
   ";}
-  if($stock<=10){
+  if($stock<=0.25*$stock_init){
     echo "
     <div class='col-lg-6 col-xl-3' >
     <span class='badge badge-danger'>$stock</span>
