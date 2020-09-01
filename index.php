@@ -414,7 +414,7 @@ if (isset($_POST['btn_save'])) {
                           $row = mysqli_fetch_assoc($result);
                           $row66 = mysqli_fetch_assoc($result66);
                           $sum = intval($row['total_amts']);
-                          $sum66 = intval($row['total_price']);
+                          $sum66 = intval($row66['total_price']);
                           $sum987 = $sum + $sum66;
 							echo " $sum987 ";
                           ?> DH</h4>
