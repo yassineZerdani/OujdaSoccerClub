@@ -410,7 +410,7 @@ if (isset($_POST['btn_save'])) {
                     <div class="text-center p-4 border-left">
                       <h4><?php
                           $result = mysqli_query($con, "select sum(paiement_avance) as total_amts from users WHERE YEAR(date_creation)=YEAR(NOW())") or die("query 2 incorrect.......");
-                          $result66 = mysqli_query($con, "select sum(price) as total_price from stadium_reservations WHERE YEAR(reservation_date)=YEAR(NOW())") or die("query 2 incorrect.......");
+                          $result66 = mysqli_query($con, "select sum(price) as total_price from stadium_reservations WHERE YEAR(reservation_date)=YEAR(NOW()) AND status LIKE 'Paid'") or die("query 2 incorrect.......");
                           $row = mysqli_fetch_assoc($result);
                           $row66 = mysqli_fetch_assoc($result66);
                           $sum = intval($row['total_amts']);
