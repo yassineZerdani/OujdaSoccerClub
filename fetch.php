@@ -1,6 +1,6 @@
 <?php
 //fetch.php
-$connect = mysqli_connect("localhost", "root", "", "heroku_85f8cfc15f34318");
+$connect = mysqli_connect("us-cdbr-east-02.cleardb.com", "b757ff0df897f7", "77b62a27", "heroku_85f8cfc15f34318");
 $columns = array('product_title', 'total', 'total_price', 'stock');
 
 $query = "SELECT order_products.product_id, SUM(order_products.qty) AS total, order_products.date AS date, product_title, product_price*SUM(order_products.qty) AS total_price, stock FROM products JOIN order_products ON products.product_id = order_products.product_id WHERE ";
