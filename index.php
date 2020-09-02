@@ -93,6 +93,92 @@ if (isset($_POST['btn_save'])) {
                                     $su11 = $o11['total_orders_info11'];
                                     $su12 = $o12['total_orders_info12'];
 ?>
+<?php
+                                    $es1 = mysqli_query($con, "select sum(price) as total_stadium_reservations1 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=1") or die("query 3 incorrect.......");
+                                    $es2 = mysqli_query($con, "select sum(price) as total_stadium_reservations2 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=2") or die("query 3 incorrect.......");
+                                    $es3 = mysqli_query($con, "select sum(price) as total_stadium_reservations3 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=3") or die("query 3 incorrect.......");
+                                    $es4 = mysqli_query($con, "select sum(price) as total_stadium_reservations4 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=4") or die("query 3 incorrect.......");
+                                    $es5 = mysqli_query($con, "select sum(price) as total_stadium_reservations5 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=5") or die("query 3 incorrect.......");
+                                    $es6 = mysqli_query($con, "select sum(price) as total_stadium_reservations6 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=6") or die("query 3 incorrect.......");
+                                    $es7 = mysqli_query($con, "select sum(price) as total_stadium_reservations7 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=7") or die("query 3 incorrect.......");
+                                    $es8 = mysqli_query($con, "select sum(price) as total_stadium_reservations8 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=8") or die("query 3 incorrect.......");
+                                    $es9 = mysqli_query($con, "select sum(price) as total_stadium_reservations9 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=9") or die("query 3 incorrect.......");
+                                    $es10 = mysqli_query($con, "select sum(price) as total_stadium_reservations10 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=10") or die("query 3 incorrect.......");
+                                    $es11 = mysqli_query($con, "select sum(price) as total_stadium_reservations11 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=11") or die("query 3 incorrect.......");
+                                    $es12 = mysqli_query($con, "select sum(price) as total_stadium_reservations12 from stadium_reservations where status = 'Paid' AND MONTH(reservation_date)=12") or die("query 3 incorrect.......");
+                                    $o1 = mysqli_fetch_assoc($es1);
+                                    $o2 = mysqli_fetch_assoc($es2);
+                                    $o3 = mysqli_fetch_assoc($es3);
+                                    $o4 = mysqli_fetch_assoc($es4);
+                                    $o5 = mysqli_fetch_assoc($es5);
+                                    $o6 = mysqli_fetch_assoc($es6);
+                                    $o7 = mysqli_fetch_assoc($es7);
+                                    $o8 = mysqli_fetch_assoc($es8);
+                                    $o9 = mysqli_fetch_assoc($es9);
+                                    $o10 = mysqli_fetch_assoc($es10);
+                                    $o11 = mysqli_fetch_assoc($es11);
+                                    $o12 = mysqli_fetch_assoc($es12);
+                                    $suk1 = $o1['total_stadium_reservations1'];
+                                    $suk2 = $o2['total_stadium_reservations2'];
+                                    $suk3 = $o3['total_stadium_reservations3'];
+                                    $suk4 = $o4['total_stadium_reservations4'];
+                                    $suk5 = $o5['total_stadium_reservations5'];
+                                    $suk6 = $o6['total_stadium_reservations6'];
+                                    $suk7 = $o7['total_stadium_reservations7'];
+                                    $suk8 = $o8['total_stadium_reservations8'];
+                                    $suk9 = $o9['total_stadium_reservations9'];
+                                    $suk10 = $o10['total_stadium_reservations10'];
+                                    $suk11 = $o11['total_stadium_reservations11'];
+                                    $suk12 = $o12['total_stadium_reservations12'];
+                                    $kl1 = mysqli_query($con, "select sum(paiement_avance) as total_users1 from users where MONTH(date_creation)=1") or die("query 3 incorrect.......");
+                                    $kl2 = mysqli_query($con, "select sum(paiement_avance) as total_users2 from users where MONTH(date_creation)=2") or die("query 3 incorrect.......");
+                                    $kl3 = mysqli_query($con, "select sum(paiement_avance) as total_users3 from users where MONTH(date_creation)=3") or die("query 3 incorrect.......");
+                                    $kl4 = mysqli_query($con, "select sum(paiement_avance) as total_users4 from users where MONTH(date_creation)=4") or die("query 3 incorrect.......");
+                                    $kl5 = mysqli_query($con, "select sum(paiement_avance) as total_users5 from users where MONTH(date_creation)=5") or die("query 3 incorrect.......");
+                                    $kl6 = mysqli_query($con, "select sum(paiement_avance) as total_users6 from users where MONTH(date_creation)=6") or die("query 3 incorrect.......");
+                                    $kl7 = mysqli_query($con, "select sum(paiement_avance) as total_users7 from users where MONTH(date_creation)=7") or die("query 3 incorrect.......");
+                                    $kl8 = mysqli_query($con, "select sum(paiement_avance) as total_users8 from users where MONTH(date_creation)=8") or die("query 3 incorrect.......");
+                                    $kl9 = mysqli_query($con, "select sum(paiement_avance) as total_users9 from users where MONTH(date_creation)=9") or die("query 3 incorrect.......");
+                                    $kl10 = mysqli_query($con, "select sum(paiement_avance) as total_users10 from users where MONTH(date_creation)=10") or die("query 3 incorrect.......");
+                                    $kl11 = mysqli_query($con, "select sum(paiement_avance) as total_users11 from users where MONTH(date_creation)=11") or die("query 3 incorrect.......");
+                                    $kl12 = mysqli_query($con, "select sum(paiement_avance) as total_users12 from users where MONTH(date_creation)=12") or die("query 3 incorrect.......");
+                                    $or1 = mysqli_fetch_assoc($kl1);
+                                    $or2 = mysqli_fetch_assoc($kl2);
+                                    $or3 = mysqli_fetch_assoc($kl3);
+                                    $or4 = mysqli_fetch_assoc($kl4);
+                                    $or5 = mysqli_fetch_assoc($kl5);
+                                    $or6 = mysqli_fetch_assoc($kl6);
+                                    $or7 = mysqli_fetch_assoc($kl7);
+                                    $or8 = mysqli_fetch_assoc($kl8);
+                                    $or9 = mysqli_fetch_assoc($kl9);
+                                    $or10 = mysqli_fetch_assoc($kl10);
+                                    $or11 = mysqli_fetch_assoc($kl11);
+                                    $or12 = mysqli_fetch_assoc($kl12);
+                                    $suuk1 = $or1['total_users1'];
+                                    $suuk2 = $or2['total_users2'];
+                                    $suuk3 = $or3['total_users3'];
+                                    $suuk4 = $or4['total_users4'];
+                                    $suuk5 = $or5['total_users5'];
+                                    $suuk6 = $or6['total_users6'];
+                                    $suuk7 = $or7['total_users7'];
+                                    $suuk8 = $or8['total_users8'];
+                                    $suuk9 = $or9['total_users9'];
+                                    $suuk10 = $or10['total_users10'];
+                                    $suuk11 = $or11['total_users11'];
+                                    $suuk12 = $or12['total_users12'];
+                                    $suukk1 = $suk1 + $suuk1;
+                                    $suukk2 = $suk2 + $suuk2;
+                                    $suukk3 = $suk3 + $suuk3;
+                                    $suukk4 = $suk4 + $suuk4;
+                                    $suukk5 = $suk5 + $suuk5;
+                                    $suukk6 = $suk6 + $suuk6;
+                                    $suukk7 = $suk7 + $suuk7;
+                                    $suukk8 = $suk8 + $suuk8;
+                                    $suukk9 = $suk9 + $suuk9;
+                                    $suukk10 = $suk10 + $suuk10;
+                                    $suukk11 = $suk11 + $suuk11;
+                                    $suukk12 = $suk12 + $suuk12;
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -828,7 +914,7 @@ if (isset($_POST['btn_save'])) {
     var activity = document.getElementById("aactivity");
     if (activity !== null) {
       var activityData = [{
-          first: [<?php echo $count1; ?>, <?php echo $count2; ?>, <?php echo $count3; ?>, <?php echo $count4; ?>, <?php echo $count5; ?>, <?php echo $count6; ?>, <?php echo $count7; ?>, <?php echo $count8; ?>, <?php echo $count9; ?>, <?php echo $count10; ?>, <?php echo $count11; ?>, <?php echo $count12; ?>],
+          first: [<?php echo $suukk1; ?>, <?php echo $suukk2; ?>, <?php echo $suukk3; ?>, <?php echo $suukk4; ?>, <?php echo $suukk5; ?>, <?php echo $suukk6; ?>, <?php echo $suukk7; ?>, <?php echo $suukk8; ?>, <?php echo $suukk9; ?>, <?php echo $suukk10; ?>, <?php echo $suukk11; ?>, <?php echo $suukk12; ?>],
           second: [<?php echo $su1; ?>, <?php echo $su2; ?>, <?php echo $su3; ?>, <?php echo $su4; ?>, <?php echo $su5; ?>, <?php echo $su6; ?>, <?php echo $su7; ?>, <?php echo $su8; ?>, <?php echo $su9; ?>, <?php echo $su10; ?>, <?php echo $su11; ?>, <?php echo $su12; ?>]
         },
         {
