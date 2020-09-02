@@ -522,7 +522,45 @@ if (isset($_POST['btn_save'])) {
       <div class="modal-footer">
       </div>
     </div>
-
+    <?php
+                                    $res1 = mysqli_query($con, "select sum(total_amt) as total_orders_info1 from orders_info where MONTH(date_creation)=1") or die("query 3 incorrect.......");
+                                    $res2 = mysqli_query($con, "select sum(total_amt) as total_orders_info2 from orders_info where MONTH(date_creation)=2") or die("query 3 incorrect.......");
+                                    $res3 = mysqli_query($con, "select sum(total_amt) as total_orders_info3 from orders_info where MONTH(date_creation)=3") or die("query 3 incorrect.......");
+                                    $res4 = mysqli_query($con, "select sum(total_amt) as total_orders_info4 from orders_info where MONTH(date_creation)=4") or die("query 3 incorrect.......");
+                                    $res5 = mysqli_query($con, "select sum(total_amt) as total_orders_info5 from orders_info where MONTH(date_creation)=5") or die("query 3 incorrect.......");
+                                    $res6 = mysqli_query($con, "select sum(total_amt) as total_orders_info6 from orders_info where MONTH(date_creation)=6") or die("query 3 incorrect.......");
+                                    $res7 = mysqli_query($con, "select sum(total_amt) as total_orders_info7 from orders_info where MONTH(date_creation)=7") or die("query 3 incorrect.......");
+                                    $res8 = mysqli_query($con, "select sum(total_amt) as total_orders_info8 from orders_info where MONTH(date_creation)=8") or die("query 3 incorrect.......");
+                                    $res9 = mysqli_query($con, "select sum(total_amt) as total_orders_info9 from orders_info where MONTH(date_creation)=9") or die("query 3 incorrect.......");
+                                    $res10 = mysqli_query($con, "select sum(total_amt) as total_orders_info10 from orders_info where MONTH(date_creation)=10") or die("query 3 incorrect.......");
+                                    $res11 = mysqli_query($con, "select sum(total_amt) as total_orders_info11 from orders_info where MONTH(date_creation)=11") or die("query 3 incorrect.......");
+                                    $res12 = mysqli_query($con, "select sum(total_amt) as total_orders_info12 from orders_info where MONTH(date_creation)=12") or die("query 3 incorrect.......");
+                                    $ro = mysqli_fetch_assoc($res);
+                                    $ro1 = mysqli_fetch_assoc($res1);
+                                    $ro2 = mysqli_fetch_assoc($res2);
+                                    $ro3 = mysqli_fetch_assoc($res3);
+                                    $ro4 = mysqli_fetch_assoc($res4);
+                                    $ro5 = mysqli_fetch_assoc($res5);
+                                    $ro6 = mysqli_fetch_assoc($res6);
+                                    $ro7 = mysqli_fetch_assoc($res7);
+                                    $ro8 = mysqli_fetch_assoc($res8);
+                                    $ro9 = mysqli_fetch_assoc($res9);
+                                    $ro10 = mysqli_fetch_assoc($res10);
+                                    $ro11 = mysqli_fetch_assoc($res11);
+                                    $ro12 = mysqli_fetch_assoc($res12);
+                                    $su1 = $ro1['total_orders_info1'];
+                                    $su2 = $ro2['total_orders_info2'];
+                                    $su3 = $ro3['total_orders_info3'];
+                                    $su4 = $ro4['total_orders_info4'];
+                                    $su5 = $ro5['total_orders_info5'];
+                                    $su6 = $ro6['total_orders_info6'];
+                                    $su7 = $ro7['total_orders_info7'];
+                                    $su8 = $ro8['total_orders_info8'];
+                                    $su9 = $ro9['total_orders_info9'];
+                                    $su10 = $ro10['total_orders_info10'];
+                                    $su11 = $ro11['total_orders_info11'];
+                                    $su12 = $ro12['total_orders_info12'];
+?>
   </div>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM" defer></script>
@@ -792,7 +830,7 @@ if (isset($_POST['btn_save'])) {
     if (activity !== null) {
       var activityData = [{
           first: [<?php echo $count1; ?>, <?php echo $count2; ?>, <?php echo $count3; ?>, <?php echo $count4; ?>, <?php echo $count5; ?>, <?php echo $count6; ?>, <?php echo $count7; ?>, <?php echo $count8; ?>, <?php echo $count9; ?>, <?php echo $count10; ?>, <?php echo $count11; ?>, <?php echo $count12; ?>],
-          second: [<?php echo $countm1; ?>, <?php echo $countm2; ?>, <?php echo $countm3; ?>, <?php echo $countm4; ?>, <?php echo $countm5; ?>, <?php echo $countm6; ?>, <?php echo $countm7; ?>, <?php echo $countm8; ?>, <?php echo $countm9; ?>, <?php echo $countm10; ?>, <?php echo $countm11; ?>, <?php echo $countm12; ?>]
+          second: [<?php echo $su1; ?>, <?php echo $su2; ?>, <?php echo $su3; ?>, <?php echo $su4; ?>, <?php echo $su5; ?>, <?php echo $su6; ?>, <?php echo $su7; ?>, <?php echo $su8; ?>, <?php echo $su9; ?>, <?php echo $su10; ?>, <?php echo $su11; ?>, <?php echo $su12; ?>]
         },
         {
           first: [0, 65, 77, 33, 49, 100, 100],
