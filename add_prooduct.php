@@ -35,11 +35,14 @@ mysqli_query($con,"insert into products (product_cat,product_title,product_price
 
  header("location: sumit_form.php?success=1");
 }*/
-if(isset($_POST['category']) & isset($_POST['price']) & isset($_POST['product_name']) & isset($_POST['stock']) & isset($_POST['description'])){
+if(isset($_POST['category']) & isset($_POST['price']) & isset($_POST['product_name']) & isset($_POST['stock']) & isset($_POST['buying_price']) & isset($_POST['prix_uni']) & isset($_POST['nouv_entrer']) & isset($_POST['description'])){
 $category=$_POST['category'];
 $price=$_POST['price'];
 $product_name=$_POST['product_name'];
 $stock=$_POST['stock'];
+$buying_price=$_POST['buying_price'];
+$prix_uni=$_POST['prix_uni'];
+$nouv_entrer=$_POST['nouv_entrer'];
 $description=$_POST['description'];
 $pic_name = "";
 $tags = "";
@@ -54,7 +57,7 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
     //move_uploaded_file($picture_tmp_name,"uploads/products/".$pic_name);
     $response = \Cloudinary\Uploader::upload($picture_tmp_name,array(
     "folder" => "products/"))['public_id'];
-    mysqli_query($con,"insert into products (product_cat,product_title,product_price, product_desc, product_image,product_keywords,stock,stock_init) values ('$category','$product_name','$price','$description','$response','$tags','$stock','$stock')") or die ("query incorrect");
+    mysqli_query($con,"insert into products (product_cat,product_title,product_price, product_desc, product_image,product_keywords,stock,stock_init,buying_price,prix_uni,nouv_entrer) values ('$category','$product_name','$price','$description','$response','$tags','$stock','$stock','$buying_price','$prix_uni','$nouv_entrer')") or die ("query incorrect");
   }
 }
 //header("location: sumit_form.php?success=1");
@@ -343,7 +346,7 @@ if(isset($_GET['category']))
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Prix d'achat</label>
-                              <input  type="text" class="form-control validate" />
+                              <input id="buying_price" name="buying_price" type="text" class="form-control validate" />
                             </div>
 
                             <div class="row">
@@ -410,11 +413,11 @@ if(isset($_GET['category']))
                           </div>
                           <div class="form-group mb-3">
                               <label for="description">Prix unitaire</label>
-                              <input  type="text" class="form-control validate" />
+                              <input id="prix_uni" name="prix_uni" type="text" class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Nouvellle Entrer</label>
-                              <input  type="text" class="form-control validate" />
+                              <input id="nouv_entrer" name="nouv_entrer" type="text" class="form-control validate" />
                             </div>
                         </div>
                         <div class="col-12">
