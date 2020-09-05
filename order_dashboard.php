@@ -1,33 +1,34 @@
-<?php session_start(); if(!isset($_SESSION['admin'])){header("Location:login.php");die();} ?>
+<?php session_start();
+if (!isset($_SESSION['admin'])) {
+  header("Location:login.php");
+  die();
+} ?>
 <?php
 
 include("db.php");
 error_reporting(0);
 $product_category = -1;
-if(isset($_GET['action']) && $_GET['action']!="" && $_GET['action']=='delete')
-{
-$product_id=$_GET['product_id'];
-///////picture delete/////////
-$result=mysqli_query($con,"select product_image from products where product_id='$product_id'") or die("query is incorrect...");
+if (isset($_GET['action']) && $_GET['action'] != "" && $_GET['action'] == 'delete') {
+  $product_id = $_GET['product_id'];
+  ///////picture delete/////////
+  $result = mysqli_query($con, "select product_image from products where product_id='$product_id'") or die("query is incorrect...");
 
-list($picture)=mysqli_fetch_array($result);
-$path="product_images/$picture";
+  list($picture) = mysqli_fetch_array($result);
+  $path = "product_images/$picture";
 
-if(file_exists($path)==true)
-{
-  unlink($path);
-}
-else
-{}
-/*this is delet query*/
-mysqli_query($con,"SET FOREIGN_KEY_CHECKS=0")or die("query is incorrect...");
-mysqli_query($con,"delete from products where product_id='$product_id'")or die("query is incorrect...");
-mysqli_query($con,"SET FOREIGN_KEY_CHECKS=1")or die("query is incorrect...");
+  if (file_exists($path) == true) {
+    unlink($path);
+  } else {
+  }
+  /*this is delet query*/
+  mysqli_query($con, "SET FOREIGN_KEY_CHECKS=0") or die("query is incorrect...");
+  mysqli_query($con, "delete from products where product_id='$product_id'") or die("query is incorrect...");
+  mysqli_query($con, "SET FOREIGN_KEY_CHECKS=1") or die("query is incorrect...");
 }
 
 
-if(isset($_GET['category']))
-  $product_category=$_GET['category'];
+if (isset($_GET['category']))
+  $product_category = $_GET['category'];
 ?>
 
 <!DOCTYPE html>
@@ -39,12 +40,11 @@ if(isset($_GET['category']))
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Admin Dashboard</title>
-  
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
   <!-- GOOGLE FONTS -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
   <link href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css" rel="stylesheet" />
 
   <!-- PLUGINS CSS STYLE -->
@@ -76,19 +76,24 @@ if(isset($_GET['category']))
   <script src="assets/plugins/nprogress/nprogress.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $("#delete").click(function () {
+    $(document).ready(function() {
+      $("#delete").click(function() {
         $(this).hide();
       });
     });
   </script>
   <style>
-  .toast-success{background-color:#51A351 !important}
+    .toast-success {
+      background-color: #51A351 !important
+    }
   </style>
 </head>
+
 <body class="sidebar-fixed sidebar-dark header-light header-fixed" id="body">
-<script>
-    NProgress.configure({ showSpinner: false });
+  <script>
+    NProgress.configure({
+      showSpinner: false
+    });
     NProgress.start();
   </script>
 
@@ -118,8 +123,8 @@ if(isset($_GET['category']))
         <!-- begin sidebar scrollbar -->
         <div class="sidebar-scrollbar">
 
-                    <!-- sidebar menu -->
-<ul class="nav sidebar-inner" id="sidebar-menu">
+          <!-- sidebar menu -->
+          <ul class="nav sidebar-inner" id="sidebar-menu">
             <li class="has-sub">
               <a class="sidenav-item-link" href="index.php">
                 <i class="mdi mdi-view-dashboard-outline"></i>
@@ -162,35 +167,35 @@ if(isset($_GET['category']))
                 <span class="nav-text">les abonnés</span>
               </a>
             </li>
-            
-            <li  class="has-sub " >
+
+            <li class="has-sub ">
               <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#charts" aria-expanded="false" aria-controls="charts">
                 <i class="mdi mdi-coffee-outline"></i>
                 <span class="nav-text">La Cafétéria</span> <b class="caret"></b>
               </a>
-              <ul  class="collapse"  id="charts" data-parent="#sidebar-menu">
+              <ul class="collapse" id="charts" data-parent="#sidebar-menu">
                 <div class="sub-menu">
-                  <li >
+                  <li>
                     <a class="sidenav-item-link" href="products.php?category=0">
                       <span class="nav-text">Boissons</span>
                     </a>
                   </li>
-                  <li >
+                  <li>
                     <a class="sidenav-item-link" href="products.php?category=1">
                       <span class="nav-text">Boissons Chaudes</span>
                     </a>
                   </li>
-                  <li >
+                  <li>
                     <a class="sidenav-item-link" href="products.php?category=2">
                       <span class="nav-text">Biscuits</span>
                     </a>
                   </li>
-                  <li >
+                  <li>
                     <a class="sidenav-item-link" href="products.php?category=3">
                       <span class="nav-text">Snacks</span>
                     </a>
                   </li>
-                  <li >
+                  <li>
                     <a class="sidenav-item-link" href="products.php">
                       <span class="nav-text">Tous les Produits</span>
                     </a>
@@ -222,7 +227,7 @@ if(isset($_GET['category']))
 
           <div class="navbar-right ">
             <ul class="nav navbar-nav">
-<!--
+              <!--
               <li class="dropdown notifications-menu">
                 <button class="dropdown-toggle" data-toggle="dropdown">
                   <i class="mdi mdi-bell-outline"></i>
@@ -270,12 +275,12 @@ if(isset($_GET['category']))
                 </ul>
               </li>
             -->
-            <li>
-            <a href="cart.php" class="fa fa-shopping-cart" style="font-size: 35px;margin:30px;color:#151d29"><span style="font-family: sans-serif" class='badge badge-warning' id='lblCartCount'><?php echo sizeof($_SESSION["products"]); ?></span></a>
-            
-            </li>
+              <li>
+                <a href="cart.php" class="fa fa-shopping-cart" style="font-size: 35px;margin:30px;color:#151d29"><span style="font-family: sans-serif" class='badge badge-warning' id='lblCartCount'><?php echo sizeof($_SESSION["products"]); ?></span></a>
+
+              </li>
               <li><a href="logout.php" type="button" class="btn btn-outline-secondary" id="deconnexion">Deconnexion</a></li>
-              
+
             </ul>
           </div>
         </nav>
@@ -284,55 +289,64 @@ if(isset($_GET['category']))
 
 
 
-<div class="content-wrapper">
+      <div class="content-wrapper">
         <div class="content">
-        <h2 style="color: rgba(0,0,0,0.5);font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:xx-large">
-      Commander Ici :
-    </h2>
-        <br>
-        <div class="btn-group">
-  <button type="button" class="badge badge-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filtrer
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="order_dashboard.php?category=0">Boissons</a>
-    <a class="dropdown-item" href="order_dashboard.php?category=1">Boissons chaudes</a>
-    <a class="dropdown-item" href="order_dashboard.php?category=2">Biscuits</a>
-    <a class="dropdown-item" href="order_dashboard.php?category=3">Snacks</a>
-    <a class="dropdown-item" href="order_dashboard.php">Tous</a>
-    
-  </div>
-</div>
-              
+          <h2 style="color: rgba(0,0,0,0.5);font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:xx-large">
+            Commander Ici :
+          </h2>
+          <br>
+          <div class="btn-group">
+            <button type="button" class="badge badge-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Filtrer
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="order_dashboard.php?category=0">Boissons</a>
+              <a class="dropdown-item" href="order_dashboard.php?category=1">Boissons chaudes</a>
+              <a class="dropdown-item" href="order_dashboard.php?category=2">Biscuits</a>
+              <a class="dropdown-item" href="order_dashboard.php?category=3">Snacks</a>
+              <a class="dropdown-item" href="order_dashboard.php">Tous</a>
+
+            </div>
+          </div>
+
           <div class="breadcrumb-wrapper">
           </div>
           <div class="card card-default">
             <div class="card-body">
               <div class="row">
-<?php 
-if($product_category==-1)
-  $result=mysqli_query($con,"select product_id,product_image, stock, stock_init, product_title,product_price,product_cat from products")or die ("query 1 incorrect.....");
-else
-  $result=mysqli_query($con,"select product_id,product_image,stock, stock_init, product_title,product_price,product_cat from products where product_cat=$product_category")or die ("query 1 incorrect.....");
+                <?php
+                if ($product_category == -1)
+                  $result = mysqli_query($con, "select product_id,product_image, stock, stock_init, product_title,product_price,product_cat from products") or die("query 1 incorrect.....");
+                else
+                  $result = mysqli_query($con, "select product_id,product_image,stock, stock_init, product_title,product_price,product_cat from products where product_cat=$product_category") or die("query 1 incorrect.....");
 
-while(list($product_id,$image,$stock,$stock_init,$product_name,$price,$product_cat)=mysqli_fetch_array($result))
-{
-  if($stock>0.75*$stock_init){
-echo "
+                while (list($product_id, $image, $stock, $stock_init, $product_name, $price, $product_cat) = mysqli_fetch_array($result)) {
+                  if ($stock > 0.75 * $stock_init) {
+                    echo "
 <div class='col-lg-6 col-xl-3' >
 <span class='badge badge-success'>$stock</span>
-";}
-if($stock<=0.75*$stock_init && $stock>0.25*$stock_init){
-  echo "
+";
+                  }
+                  if ($stock <= 0.75 * $stock_init && $stock > 0.25 * $stock_init) {
+                    echo "
   <div class='col-lg-6 col-xl-3' >
   <span class='badge badge-warning'>$stock</span>
-  ";}
-  if($stock<=0.25*$stock_init){
-    echo "
+  ";
+                  }
+                  if ($stock <= 0.25 * $stock_init && $stock > 0) {
+                    echo "
     <div class='col-lg-6 col-xl-3' >
     <span class='badge badge-danger'>$stock</span>
-    ";}
-echo "
+    ";
+                  }
+                  if ($stock <= 0) {
+                    echo "
+    <div class='col-lg-6 col-xl-3' >
+    <span class='badge badge-danger'>$stock</span>
+    ";
+                    mysqli_query($con, "UPDATE products SET buying_price=prix_uni,stock=nouv_entrer,stock_init=nouv_entrer WHERE product_id='$product_id'") or die("query incorrect");
+                  }
+                  echo "
     <div class='card text-white bg-primary mb-3'>
     
         <div class='hovereffect'  >
@@ -342,85 +356,90 @@ echo "
             
                 <h2>$product_name</h2>
                 <a id=$product_id category=$product_cat name=\"$product_name\" price= $price type='button' class='stretched-link'";
-        if(!isset($_SESSION[products][$product_id])){
-          echo "onClick=\"incrementCart(this)\"";
-        }
-        else{
-          echo "onClick=\"addToSession(this)\"";
-        }
-echo"></a>
+                  if (!isset($_SESSION[products][$product_id])) {
+                    echo "onClick=\"incrementCart(this)\"";
+                  } else {
+                    echo "onClick=\"addToSession(this)\"";
+                  }
+                  echo "></a>
             </div>
         </div>
     </div>
 </div>
 ";
-}
-?>
-</div>
-</div>
-<script>
-function incrementCart(e){
-$('#lblCartCount').text(parseInt($('#lblCartCount').text())+1);
-e.onclick=function(){addToSession(e)};
-addToSession(e)
-}
-function addToSession(e){
-  $.ajax({
-  type: "POST",
-  url: "update_session.php",
-  data: {product:{
-    id: e.getAttribute("id"),
-    name: e.getAttribute("name"),
-    category: e.getAttribute("category"),
-    price: e.getAttribute("price")
-  }
-  },
-  success: toast()
-});
-return false;
-}
-</script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM" defer></script>
-  <script src="assets/plugins/jquery/jquery.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/plugins/toaster/toastr.min.js"></script>
-  <script src="assets/plugins/slimscrollbar/jquery.slimscroll.min.js"></script>
-  <script src="assets/plugins/charts/Chart.min.js"></script>
-  <script src="assets/plugins/ladda/spin.min.js"></script>
-  <script src="assets/plugins/ladda/ladda.min.js"></script>
-  <script src="assets/plugins/jquery-mask-input/jquery.mask.min.js"></script>
-  <script src="assets/plugins/select2/js/select2.min.js"></script>
-  <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
-  <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
-  <script src="assets/plugins/daterangepicker/moment.min.js"></script>
-  <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-  <script src="assets/plugins/jekyll-search.min.js"></script>
-  <script src="assets/js/sleek.js"></script>
-  <script src="assets/js/chart.js"></script>
-  <script src="assets/js/date-range.js"></script>
-  <script src="assets/js/map.js"></script>
-  <script src="assets/js/custom.js"></script>
-    <script>
-toastr.options = {
-  "closeButton": false,
-  "debug": false,
-  "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-bottom-right",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
-function  toast(){
-  toastr.success("Produit Ajouté!")
-}
-</script>
+                }
+                ?>
+              </div>
+            </div>
+            <script>
+              function incrementCart(e) {
+                $('#lblCartCount').text(parseInt($('#lblCartCount').text()) + 1);
+                e.onclick = function() {
+                  addToSession(e)
+                };
+                addToSession(e)
+              }
+
+              function addToSession(e) {
+                $.ajax({
+                  type: "POST",
+                  url: "update_session.php",
+                  data: {
+                    product: {
+                      id: e.getAttribute("id"),
+                      name: e.getAttribute("name"),
+                      category: e.getAttribute("category"),
+                      price: e.getAttribute("price")
+                    }
+                  },
+                  success: toast()
+                });
+                return false;
+              }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM" defer></script>
+            <script src="assets/plugins/jquery/jquery.min.js"></script>
+            <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/plugins/toaster/toastr.min.js"></script>
+            <script src="assets/plugins/slimscrollbar/jquery.slimscroll.min.js"></script>
+            <script src="assets/plugins/charts/Chart.min.js"></script>
+            <script src="assets/plugins/ladda/spin.min.js"></script>
+            <script src="assets/plugins/ladda/ladda.min.js"></script>
+            <script src="assets/plugins/jquery-mask-input/jquery.mask.min.js"></script>
+            <script src="assets/plugins/select2/js/select2.min.js"></script>
+            <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+            <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
+            <script src="assets/plugins/daterangepicker/moment.min.js"></script>
+            <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+            <script src="assets/plugins/jekyll-search.min.js"></script>
+            <script src="assets/js/sleek.js"></script>
+            <script src="assets/js/chart.js"></script>
+            <script src="assets/js/date-range.js"></script>
+            <script src="assets/js/map.js"></script>
+            <script src="assets/js/custom.js"></script>
+            <script>
+              toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+              }
+
+              function toast() {
+                toastr.success("Produit Ajouté!")
+              }
+            </script>
 </body>
+
 </html>
