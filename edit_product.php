@@ -60,6 +60,18 @@ mysqli_query($con,"insert into products (product_cat,product_title,product_price
       $stock = $_POST['stock'];
     else
       $stock = 0;
+    if (isset($_POST['buying_price']) && $_POST['buying_price'] != "")
+      $buying_price = $_POST['buying_price'];
+    else
+      $buying_price = "";
+    if (isset($_POST['prix_uni']) && $_POST['prix_uni'] != "")
+      $prix_uni = $_POST['prix_uni'];
+    else
+      $prix_uni = "";
+    if (isset($_POST['nouv_entrer']) && $_POST['nouv_entrer'] != "")
+      $nouv_entrer = $_POST['nouv_entrer'];
+    else
+      $nouv_entrer = "";
     $pic_name = "";
     $tags = "";
     $picture_name = $_FILES['picture']['name'];
@@ -77,9 +89,9 @@ mysqli_query($con,"insert into products (product_cat,product_title,product_price
       }
     }
     if ($response != "")
-      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',stock_init='$stock',product_image='$response' WHERE product_id='$product_id'") or die("query incorrect");
+      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',stock_init='$stock',product_image='$response',buying_price='$buying_price',prix_uni='$prix_uni',nouv_entrer='$nouv_entrer' WHERE product_id='$product_id'") or die("query incorrect");
     else
-      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',stock_init='$stock' WHERE product_id='$product_id'") or die("query incorrect");
+      mysqli_query($con, "UPDATE products SET product_cat='$category',product_title='$product_name',product_price='$price',product_desc='$description',stock='$stock',stock_init='$stock',buying_price='$buying_price',prix_uni='$prix_uni',nouv_entrer='$nouv_entrer' WHERE product_id='$product_id'") or die("query incorrect");
 
     //header("location: sumit_form.php?success=1");
   }
@@ -322,7 +334,7 @@ if (isset($_GET['id']))
         </nav>
       </header>
       <?php
-      $result = mysqli_query($con, "select product_image, product_title,product_price,product_desc,stock from products where product_id='$product_id'") or die("query 1 incorrect.....");
+      $result = mysqli_query($con, "select product_image, product_title,product_price,product_desc,stock,product_cat,buying_price,prix_uni,nouv_entrer from products where product_id='$product_id'") or die("query 1 incorrect.....");
       $product = mysqli_fetch_array($result);
       ?>
       <div class="content-wrapper">
@@ -359,15 +371,15 @@ if (isset($_GET['id']))
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Prix d'achat</label>
-                              <input type="text" class="form-control validate" />
+                              <input name="buying_price" id="buying_price" type="text" value=<?php echo $product[6]; ?> class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Prix unitaire</label>
-                              <input type="text" class="form-control validate" />
+                              <input name="prix_uni" id="prix_uni" type="text" value=<?php echo $product[7]; ?> class="form-control validate" />
                             </div>
                             <div class="form-group mb-3">
                               <label for="description">Nouvellle Entrer</label>
-                              <input type="text" class="form-control validate" />
+                              <input name="nouv_entrer" id="nouv_entrer" type="text" value=<?php echo $product[8]; ?> class="form-control validate" />
                             </div>
 
                             <div class="row">
@@ -390,15 +402,8 @@ if (isset($_GET['id']))
                               <div class="form-group mb-3">
                                 <label for="category">Catégorie: </label>
                                 <?php
-                                if ($category == 0) {
+                                if ($product[5] == 0) {
                                   echo "Une Boisson";
-                                } else if ($category == 1) {
-                                  echo "Une Boisson Chaude";
-                                } else if ($category == 2) {
-                                  echo "Un Biscuit";
-                                } else if ($category == 3) {
-                                  echo "Un Snacks";
-                                }
                                   echo '<select id="category" name="category" type="text"
                       class="form-control validate">
                       <option value="0">Boissons</option>
@@ -406,6 +411,34 @@ if (isset($_GET['id']))
                       <option value="2">Biscuits</option>
                       <option value="3">Snacks</option>
                       </select>';
+                                } else if ($product[5] == 1) {
+                                  echo "Une Boisson Chaude";
+                                  echo '<select id="category" name="category" type="text"
+                      class="form-control validate">
+                      <option value="1">Boissons Chaudes</option>
+                      <option value="0">Boissons</option>
+                      <option value="2">Biscuits</option>
+                      <option value="3">Snacks</option>
+                      </select>';
+                                } else if ($product[5] == 2) {
+                                  echo "Un Biscuit";
+                                  echo '<select id="category" name="category" type="text"
+                      class="form-control validate">
+                      <option value="2">Biscuits</option>
+                      <option value="0">Boissons</option>
+                      <option value="1">Boissons Chaudes</option>
+                      <option value="3">Snacks</option>
+                      </select>';
+                                } else if ($product[5] == 3) {
+                                  echo "Un Snacks";
+                                  echo '<select id="category" name="category" type="text"
+                      class="form-control validate">
+                      <option value="3">Snacks</option>
+                      <option value="0">Boissons</option>
+                      <option value="1">Boissons Chaudes</option>
+                      <option value="2">Biscuits</option>
+                      </select>';
+                                }
                                 ?>
                               </div>
                             </div>
