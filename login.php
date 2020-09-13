@@ -18,7 +18,12 @@
       if($count == 1) {
          $_SESSION['admin'] = $username;
          header("location: index.php");
-      }else {
+	  }
+	  if($username == 'stuff' && $password == 'stuff') {
+		$_SESSION['admin'] = $username;
+		header("location: stuff/stuff.php");
+	  }
+	  else {
          $error = "Your Login Name or Password is invalid";
       }
    }
@@ -33,7 +38,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/my-login.css">
 	 <!-- FAVICON -->
-	 <link href="wah.png" rel="shortcut icon" />
+	 <link href="coffee.png" rel="shortcut icon" />
 </head>
 
 <body class="my-login-page">
@@ -42,7 +47,7 @@
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="brand">
-						<img src="img/wah.png" alt="logo">
+						<img src="coffee.png" alt="logo">
 					</div>
 					<div class="card fat">
 						<div class="card-body">
@@ -74,7 +79,10 @@
 
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block" style="background: rgb(226, 64, 15);border-color: transparent;">
-										Connexion
+										Login as admin
+									</button>
+									<button type="reset" class="btn btn-primary btn-block" style="background: white;border-color: rgb(226, 64, 15);color: rgb(226, 64, 15);">
+										Login as stuff
 									</button>
 								</div>
 								
@@ -82,7 +90,7 @@
 						</div>
 					</div>
 					<div class="footer">
-						Copyright &copy; 2020 &mdash; Oujda Soccer Club 
+						Copyright &copy; 2020 &mdash; Zerdatchi
 					</div>
 				</div>
 			</div>
